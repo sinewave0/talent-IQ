@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { connectDB } from "../lib/db.js";
 const app = express();
 app.use(cors());
 import {ENV} from "../lib/env.js"
@@ -15,7 +16,19 @@ app.get("/{*any}", (req, res)=>{
 })
 
 
-app.listen(ENV.PORT, ()=>{
-    console.log(" we are actively listening on port number", ENV.PORT);
+
+
+const startServer = async() =>{
+    try {
+        await connectDB();
+        app.listen(ENV.PORT, ()=>{
+        console.log(" we are actively listening on port number", ENV.PORT);
+        
 })
+    } catch (error) {
+        console.error("error starting the server 😐", error);
+    }
+}
+
+startServer();
 
