@@ -13,5 +13,4 @@ export const connectDB = async()=>{
         console.error("error connecting to mongo DB", error)
         process.exit(1)
     }
-
 }

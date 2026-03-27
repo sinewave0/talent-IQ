@@ -1,9 +1,16 @@
 import express from "express";
 import cors from "cors";
 import { connectDB } from "../lib/db.js";
-const app = express();
-app.use(cors());
 import {ENV} from "../lib/env.js"
+import {serve } from "inngest/express"
+import { inngest, functions } from "../lib/inngest.js";
+const app = express();
+app.use(express.json());
+app.use(cors({origin:ENV.CLIENT_URL, credentials: true }));
+
+
+
+app.use("/api/inngest", serve({client:inngest, functions}))
 app.get("/health", (req, res)=>{
     res.status(200).json({message: "success: api is up and running"})
 })
