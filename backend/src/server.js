@@ -17,7 +17,9 @@ app.get("/health", (req, res)=>{
     res.status(200).json({message: "success: api is up and running"})
 })
 
-
+app.get("/video-calls", protectRoute,  (req, res)=>{
+    res.status(200).json({msg: "this is the video calls endpoint protected route"})
+})
 
 app.get("/{*any}", (req, res)=>{
     res.status(200).json({message: "you are in unexplored territory. this endpoint havent been configured yet"})
